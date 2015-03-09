@@ -33,7 +33,7 @@ before_install:
   # update composer
   - composer self-update
   # setup WP
-  - pwd
+  - current = $(pwd)
   - cd /tmp
   - composer require johnpbloch/wordpress:$WP_VERSION
   - cd wordpress
@@ -44,7 +44,7 @@ before_install:
   - sed -i -- 's/password_here//g' wp-config.php
   #create database
   - mysql -e 'CREATE DATABASE wordpress;' -uroot
-  - cd ~
+  - cd $current
   - pwd
 
 install:
