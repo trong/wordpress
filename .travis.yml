@@ -33,7 +33,6 @@ before_install:
   # update composer
   - composer self-update
   # setup WP
-  - echo "current dir: "
   - pwd
   - cd /tmp
   - composer require johnpbloch/wordpress:$WP_VERSION
