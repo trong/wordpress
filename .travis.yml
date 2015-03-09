@@ -44,6 +44,8 @@ before_install:
   - sed -i -- 's/password_here//g' wp-config.php
   #create database
   - mysql -e 'CREATE DATABASE wordpress;' -uroot
+  - cd ~
+  - pwd
 
 install:
   - composer install
