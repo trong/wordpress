@@ -32,20 +32,20 @@ env:
 before_install:
   # update composer
   - composer self-update
+
   # setup WP
-  - current=$(pwd)
-  - cd /tmp
-  - composer require johnpbloch/wordpress:$WP_VERSION
-  - cd wordpress
+  - WP_INSTALL_DIR=/tmp
+  - WP_DIR=$WP_INSTALL_DIR/wordpress
+  - composer require johnpbloch/wordpress:$WP_VERSION -d $WP_INSTALL_DIR
+
   # setup config
-  - cp wp-config-sample.php wp-config.php
-  - sed -i -- 's/database_name_here/wordpress/g' wp-config.php
-  - sed -i -- 's/username_here/root/g' wp-config.php
-  - sed -i -- 's/password_here//g' wp-config.php
+  - cp $WP_DIR/wp-config-sample.php $WP_DIR/wp-config.php
+  - sed -i -- 's/database_name_here/wordpress/g' $WP_DIR/wp-config.php
+  - sed -i -- 's/username_here/root/g' $WP_DIR/wp-config.php
+  - sed -i -- 's/password_here//g' $WP_DIR/wp-config.php
+
   #create database
   - mysql -e 'CREATE DATABASE wordpress;' -uroot
-  - cd $current
-  - pwd
 
 install:
   - composer install
