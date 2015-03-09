@@ -30,7 +30,12 @@ env:
 
 # before_install: Failures in this section will result in build status 'errored'
 before_install:
+  # update composer
+  - composer self-update
   # setup WP
+  - echo "current dir: "
+  - pwd
+  - cd /tmp
   - composer require johnpbloch/wordpress:$WP_VERSION
   - cd wordpress
   # setup config
@@ -40,5 +45,8 @@ before_install:
   - sed -i -- 's/password_here//g' wp-config.php
   #create database
   - mysql -e 'CREATE DATABASE wordpress;' -uroot
+
+install:
+  - composer install
 
 script: phpunit
