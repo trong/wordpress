@@ -41,10 +41,10 @@ before_install:
   - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_INSTALL_DIR
 
   # setup config
-  - cp $WP_DIR/wp-config-sample.php $WP_DIR/wp-config.php
-  - sed -i -- 's/database_name_here/wordpress/g' $WP_DIR/wp-config.php
-  - sed -i -- 's/username_here/root/g' $WP_DIR/wp-config.php
-  - sed -i -- 's/password_here//g' $WP_DIR/wp-config.php
+  - cp $WP_DIR/wp-tests-config-sample.php $WP_DIR/wp-tests-config.php
+  - sed -i -- 's/youremptytestdbnamehere/wordpress/g' $WP_DIR/wp-tests-config.php
+  - sed -i -- 's/yourusernamehere/root/g' $WP_DIR/wp-tests-config.php
+  - sed -i -- 's/yourpasswordhere//g' $WP_DIR/wp-tests-config.php
 
   # create database
   - mysql -e 'CREATE DATABASE wordpress;' -uroot
