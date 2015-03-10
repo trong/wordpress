@@ -34,9 +34,12 @@ before_install:
   - composer self-update
 
   # setup WP
+  - PLUGIN=rutube-wordpress
   - WP_INSTALL_DIR=/tmp
   - WP_DIR=$WP_INSTALL_DIR/wordpress
+  - WP_PLUGINS_DIR=$WP_DIR/wp-content/plugins
   - composer require johnpbloch/wordpress:$WP_VERSION -d $WP_INSTALL_DIR
+  - mkdir -p $WP_PLUGINS_DIR/$PLUGIN
 
   # setup config
   - cp $WP_DIR/wp-config-sample.php $WP_DIR/wp-config.php
@@ -44,10 +47,12 @@ before_install:
   - sed -i -- 's/username_here/root/g' $WP_DIR/wp-config.php
   - sed -i -- 's/password_here//g' $WP_DIR/wp-config.php
 
-  #create database
+  # create database
   - mysql -e 'CREATE DATABASE wordpress;' -uroot
 
 install:
   - composer install
+  # copy plugin to WP
+  - cp -R * $WP_PLUGINS_DIR/$PLUGIN
 
 script: phpunit
