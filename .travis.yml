@@ -41,6 +41,10 @@ before_install:
   - composer require johnpbloch/wordpress:$WP_VERSION -d $WP_INSTALL_DIR
   - mkdir -p $WP_PLUGINS_DIR/$PLUGIN
 
+  # copy plugin to WP
+  - cp -R * $WP_PLUGINS_DIR/$PLUGIN
+  - cd $WP_PLUGINS_DIR/$PLUGIN
+
   # setup config
   - cp $WP_DIR/wp-config-sample.php $WP_DIR/wp-config.php
   - sed -i -- 's/database_name_here/wordpress/g' $WP_DIR/wp-config.php
@@ -52,7 +56,5 @@ before_install:
 
 install:
   - composer install
-  # copy plugin to WP
-  - cp -R * $WP_PLUGINS_DIR/$PLUGIN
 
 script: phpunit
