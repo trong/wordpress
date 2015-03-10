@@ -34,11 +34,11 @@ before_install:
   - composer self-update
 
   # setup WP
-  - PLUGIN=rutube
-  - WP_INSTALL_DIR=/tmp
-  - WP_DIR=$WP_INSTALL_DIR/wordpress
-  - WP_PLUGIN_DIR=$WP_DIR/wp-content/plugins/$PLUGIN
-  - composer require johnpbloch/wordpress:$WP_VERSION -d $WP_INSTALL_DIR
+  - export PLUGIN=rutube
+  - export WP_INSTALL_DIR=/tmp/wordpress
+  - export WP_DIR=$WP_INSTALL_DIR/src
+  - export WP_PLUGIN_DIR=$WP_DIR/wp-content/plugins/$PLUGIN
+  - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_INSTALL_DIR
 
   # setup config
   - cp $WP_DIR/wp-config-sample.php $WP_DIR/wp-config.php
