@@ -43,10 +43,10 @@ before_install:
   - ls -al $WP_DIR
 
   # setup config
-  - cp $WP_DIR/wp-tests-config-sample.php $WP_DIR/wp-tests-config.php
-  - sed -i -- 's/youremptytestdbnamehere/wordpress/g' $WP_DIR/wp-tests-config.php
-  - sed -i -- 's/yourusernamehere/root/g' $WP_DIR/wp-tests-config.php
-  - sed -i -- 's/yourpasswordhere//g' $WP_DIR/wp-tests-config.php
+  - cp $WP_INSTALL_DIR/wp-tests-config-sample.php $WP_INSTALL_DIR/wp-tests-config.php
+  - sed -i -- 's/youremptytestdbnamehere/wordpress/g' $WP_INSTALL_DIR/wp-tests-config.php
+  - sed -i -- 's/yourusernamehere/root/g' $WP_INSTALL_DIR/wp-tests-config.php
+  - sed -i -- 's/yourpasswordhere//g' $WP_INSTALL_DIR/wp-tests-config.php
 
   # create database
   - mysql -e 'CREATE DATABASE wordpress;' -uroot
